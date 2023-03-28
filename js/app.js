@@ -6,7 +6,7 @@ const loadPhones = async (searchText, dataLimit) => {
 };
 
 const displayPhones = (phones, dataLimit) => {
-  console.log(phones);
+  //console.log(phones);
   const phonesContainer = document.getElementById("phones-container");
   phonesContainer.innerHTML = "";
   // display 10 phones only
@@ -84,10 +84,11 @@ document.getElementById("btn-show-all").addEventListener("click", function () {
 });
 
 const loadPhoneDetails = async (id) => {
-  const url = `www.openapi.programming-hero.com/api/phone/${id}`;
+  const url = `https://openapi.programming-hero.com/api/phone/${id}`;
   const res = await fetch(url);
   const data = await res.json();
-  displayPhoneDetails(data.data);
+
+  displayPhoneDetails(data["data"]);
 };
 
 const displayPhoneDetails = (phone) => {
@@ -96,9 +97,12 @@ const displayPhoneDetails = (phone) => {
   modalTitle.innerText = phone.name;
   const phoneDetails = document.getElementById("phone-details");
   console.log(phone.mainFeatures.sensors[0]);
+
   phoneDetails.innerHTML = `
-        <p>Release Date: ${phone.releaseDate}</p>
-        <p>Storage: ${phone.mainFeatures}</p>
+        <p>Release Date: ${
+          phone.releaseDate ? phone.releaseDate : "not released yet!"
+        }</p>
+        <p>Storage: ${phone.mainFeatures.storage}</p>
         <p>Others: ${
           phone.others ? phone.others.Bluetooth : "No Bluetooth Information"
         }</p>
@@ -110,4 +114,4 @@ const displayPhoneDetails = (phone) => {
     `;
 };
 
-loadPhones("apple");
+loadPhones("apple", 10);
