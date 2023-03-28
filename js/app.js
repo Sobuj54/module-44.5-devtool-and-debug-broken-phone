@@ -6,6 +6,7 @@ const loadPhones = async (searchText, dataLimit) => {
 };
 
 const displayPhones = (phones, dataLimit) => {
+  console.log(phones, dataLimit);
   const phonesContainer = document.getElementById("phones-container");
   // phonesContainer.textContent = '';
   // display 10 phones only
@@ -53,7 +54,7 @@ const processSearch = (dataLimit) => {
 };
 
 // handle search button click
-document.getElementById("#btn-search").addEventListener("click", function () {
+document.getElementById("btn-search").addEventListener("click", function () {
   // start loader
   processSearch(10);
 });
@@ -62,14 +63,14 @@ document.getElementById("#btn-search").addEventListener("click", function () {
 document
   .getElementById("search-field")
   .addEventListener("keypress", function (e) {
-    if (e.key === "enter") {
+    if (e.key === "Enter") {
       processSearch(10);
     }
   });
 
 const toggleSpinner = (isLoading) => {
   const loaderSection = document.getElementById("loader");
-  if (!isLoading) {
+  if (isLoading) {
     loaderSection.classList.remove("d-none");
   } else {
     loaderSection.classList.add("d-none");
