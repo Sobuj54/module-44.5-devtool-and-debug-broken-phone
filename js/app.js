@@ -13,9 +13,9 @@ const displayPhones = (phones, dataLimit) => {
   const showAll = document.getElementById("show-all");
   if (dataLimit && phones.length > 10) {
     phones = phones.slice(0, 10);
-    showAll.classList.remove("d-none");
+    showAll.classList.remove("d-block");
   } else {
-    showAll.classList.add("d-hidden");
+    showAll.classList.add("d-none");
   }
 
   // display no phones found
@@ -27,10 +27,10 @@ const displayPhones = (phones, dataLimit) => {
   }
   // display all phones
   phones.forEach((phone) => {
-    //console.log(phone);
+    console.log(phone);
     const phoneDiv = document.createElement("div");
     phoneDiv.classList.add("col");
-    phonesContainer.innerHTML = `
+    phoneDiv.innerHTML = `
         <div class="card p-4">
             <img src="${phone.image}" class="card-img-top" alt="...">
             <div class="card-body">
@@ -80,7 +80,7 @@ const toggleSpinner = (isLoading) => {
 
 // not the best way to load show All
 document.getElementById("btn-show-all").addEventListener("click", function () {
-  processSearch();
+  processSearch(11);
 });
 
 const loadPhoneDetails = async (id) => {
