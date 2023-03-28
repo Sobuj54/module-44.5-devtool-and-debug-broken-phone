@@ -6,14 +6,14 @@ const loadPhones = async (searchText, dataLimit) => {
 };
 
 const displayPhones = (phones, dataLimit) => {
-  //console.log(phones, dataLimit);
+  console.log(phones);
   const phonesContainer = document.getElementById("phones-container");
   phonesContainer.innerHTML = "";
   // display 10 phones only
   const showAll = document.getElementById("show-all");
   if (dataLimit && phones.length > 10) {
     phones = phones.slice(0, 10);
-    showAll.classList.remove("d-block");
+    showAll.classList.remove("d-none");
   } else {
     showAll.classList.add("d-none");
   }
@@ -27,7 +27,6 @@ const displayPhones = (phones, dataLimit) => {
   }
   // display all phones
   phones.forEach((phone) => {
-    console.log(phone);
     const phoneDiv = document.createElement("div");
     phoneDiv.classList.add("col");
     phoneDiv.innerHTML = `
@@ -51,13 +50,14 @@ const processSearch = (dataLimit) => {
   toggleSpinner(true);
   const searchField = document.getElementById("search-field");
   const searchText = searchField.value;
+
   loadPhones(searchText, dataLimit);
 };
 
 // handle search button click
 document.getElementById("btn-search").addEventListener("click", function () {
   // start loader
-  processSearch(10);
+  processSearch();
 });
 
 // search input field enter key handler
@@ -80,7 +80,7 @@ const toggleSpinner = (isLoading) => {
 
 // not the best way to load show All
 document.getElementById("btn-show-all").addEventListener("click", function () {
-  processSearch(11);
+  processSearch();
 });
 
 const loadPhoneDetails = async (id) => {
@@ -110,4 +110,4 @@ const displayPhoneDetails = (phone) => {
     `;
 };
 
-loadPhones("apple", 11);
+loadPhones("apple");
